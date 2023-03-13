@@ -2,12 +2,15 @@ package com.itheima.reggie.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.itheima.reggie.common.CustomException;
 import com.itheima.reggie.dto.DishDto;
 import com.itheima.reggie.entity.Dish;
 import com.itheima.reggie.entity.DishFlavor;
+import com.itheima.reggie.entity.SetmealDish;
 import com.itheima.reggie.mapper.DishMapper;
 import com.itheima.reggie.service.DishFlavorService;
 import com.itheima.reggie.service.DishService;
+import com.itheima.reggie.service.SetmealDishService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,10 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
 
     @Autowired
     private DishFlavorService dishFlavorService;
+
+    @Autowired
+    private SetmealDishService setmealDishService;
+
     /**
      * 新增菜品，同时保存对应口味数据
      * @param dishDto
@@ -97,5 +104,51 @@ public class DishServiceImpl extends ServiceImpl<DishMapper, Dish> implements Di
 
         //处理完成后进行批量保存
         dishFlavorService.saveBatch(flavors);
+    }
+
+
+    /**
+     * 启售、停售菜品
+     * @param ids
+     */
+    @Override
+    public void updateStatus(List<Long> ids) {
+        //根据ids获取到菜品数据
+        List<Dish> dishes = this.listByIds(ids);
+
+        //进行菜品的状态的修改
+        for(Dish dish : dishes){
+            if(dish.getStatus() == 0){
+                dish.setStatus(1);
+            }else {
+                dish.setStatus(0);
+            }
+        }
+        //更新修改的菜品
+        this.updateBatchById(dishes);
+    }
+
+    /**
+     * //删除菜品同时删除其口味信息(套餐中有该菜品则不能删除)
+     * @param ids
+     */
+    @Override
+    public void removeWithFlavor(List<Long> ids) {
+        //查询setmeal_dish表，菜品是否被包含在某套餐中
+        LambdaQueryWrapper<SetmealDish> qw = new LambdaQueryWrapper<>();
+        qw.in(SetmealDish::getDishId,ids);
+        int count  = setmealDishService.count(qw);
+        if(count > 0){
+            //如果不能删除，抛出一个业务异常
+            throw new CustomException("菜品已经被包含在套餐中，不能删除！");
+        }
+
+        //若可以删除，先删除菜品的数据
+        this.removeByIds(ids);
+
+        //再删除菜品口味数据
+        LambdaQueryWrapper<DishFlavor> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.in(DishFlavor::getDishId,ids);
+        dishFlavorService.remove(queryWrapper);
     }
 }

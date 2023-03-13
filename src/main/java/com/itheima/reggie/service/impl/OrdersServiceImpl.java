@@ -116,4 +116,24 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         //清空购物车数据
         shoppingCartService.remove(queryWrapper);
     }
+
+    /**
+     * 修改订单状态
+     * @param orders
+     */
+    @Override
+    public void updateStatus(Orders orders) {
+        //获取当前订单id
+        Long id = orders.getId();
+        //根据订单id去查询对应的订单信息
+        Orders orders1 = this.getById(id);
+        //修改状态码
+        if(orders1 != null){
+            orders1.setStatus(orders.getStatus());
+            //保存
+            this.updateById(orders1);
+        }else {
+            throw new CustomException("订单不存在！");
+        }
+    }
 }

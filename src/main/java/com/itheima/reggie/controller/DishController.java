@@ -17,6 +17,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -207,6 +208,50 @@ public class DishController {
         redisTemplate.opsForValue().set(key,dishDtoList,60, TimeUnit.MINUTES);
 
         return R.success(dishDtoList);
+    }
+
+    /**
+     * 停售菜品
+     * @return
+     */
+    @PostMapping("/status/0")
+    public R<String> stopSelling(@RequestParam List<Long> ids){
+        log.info("菜品id：{}",ids);
+        dishService.updateStatus(ids);
+
+        //修改后，需要清除缓存
+        //方案一：清理【所有】菜品的缓存数据
+        Set keys = redisTemplate.keys("dish_*");
+        redisTemplate.delete(keys);
+
+        return R.success("停售成功！");
+    }
+
+    /**
+     * 启售菜品
+     * @return
+     */
+    @PostMapping("/status/1")
+    public R<String> startSelling(@RequestParam List<Long> ids){
+        log.info("菜品id：{}",ids);
+        dishService.updateStatus(ids);
+
+        Set keys = redisTemplate.keys("dish_*");
+        redisTemplate.delete(keys);
+
+        return R.success("启售成功！");
+    }
+
+    /**
+     * 根据id删除菜品
+     * @param ids
+     * @return
+     */
+    @DeleteMapping
+    public R<String> deleteDish(@RequestParam List<Long> ids){
+        log.info("菜品id：{}",ids);
+        dishService.removeWithFlavor(ids);
+        return R.success("删除菜品成功！");
     }
 
 }

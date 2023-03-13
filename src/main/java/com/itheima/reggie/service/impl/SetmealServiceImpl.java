@@ -99,4 +99,25 @@ public class SetmealServiceImpl extends ServiceImpl<SetmealMapper, Setmeal> impl
         //处理完成后进行批量保存
         setmealDishService.saveBatch(setmealDishes);
     }
+
+    /**
+     * 启售、停售套餐
+     * @param ids
+     */
+    @Override
+    public void updateSetmealStatus(List<Long> ids) {
+        //根据id查询套餐
+        List<Setmeal> setmeals = this.listByIds(ids);
+
+        //修改套餐的status字段
+        for(Setmeal setmeal: setmeals){
+            if(setmeal.getStatus() == 1){
+                setmeal.setStatus(0);
+            }else {
+                setmeal.setStatus(1);
+            }
+        }
+        //更新修改的套餐
+        this.updateBatchById(setmeals);
+    }
 }

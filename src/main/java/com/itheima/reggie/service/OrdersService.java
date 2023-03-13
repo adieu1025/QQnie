@@ -10,4 +10,11 @@ public interface OrdersService extends IService<Orders> {
      * @param orders
      */
     public void submit(Orders orders);
+
+    /**
+     * 修改订单状态
+     * @param orders
+     */
+    void updateStatus(Orders orders);
+
 }

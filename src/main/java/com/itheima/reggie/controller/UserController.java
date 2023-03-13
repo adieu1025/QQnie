@@ -105,4 +105,15 @@ public class UserController {
         return R.error("登陆失败！");
     }
 
+    /**
+     * 退出登陆
+     * @param session
+     * @return
+     */
+    @PostMapping("/loginout")
+    public R<String> logout(HttpSession session){
+        //清理session中保存的当前登陆用户的id
+        session.removeAttribute("user");
+        return R.success("退出登陆成功！");
+    }
 }

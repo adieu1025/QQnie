@@ -21,6 +21,12 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    /**
+     * 员工登陆后台管理系统
+     * @param request
+     * @param employee
+     * @return
+     */
     @PostMapping("/login")
     public R<Employee> login(HttpServletRequest request,@RequestBody Employee employee){
 
@@ -54,7 +60,7 @@ public class EmployeeController {
     }
 
     /**
-     * 员工退出
+     * 员工退出登陆
      * @param request
      * @return
      */
@@ -65,6 +71,11 @@ public class EmployeeController {
         return R.success("退出登陆成功！");
     }
 
+    /**
+     * 保存员工信息
+     * @param employee
+     * @return
+     */
     @PostMapping
     public R<String> save(@RequestBody Employee employee){
         //设置初始密码，进行md5加密处理

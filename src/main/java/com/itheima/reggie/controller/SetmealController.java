@@ -203,4 +203,34 @@ public class SetmealController {
 
         return R.success(dishDtoList);
     }
+
+    /**
+     * 停售套餐
+     * @param ids
+     * @return
+     */
+    @RequestMapping("/status/0")
+    public R<String> stopSelling(@RequestParam List<Long> ids){
+        log.info("ids:{}",ids);
+        setmealService.updateSetmealStatus(ids);
+
+        return R.success("停售套餐成功！");
+    }
+
+    /**
+     * 启售套餐
+     * @param ids
+     * @return
+     */
+    @RequestMapping("/status/1")
+    public R<String> startSelling(@RequestParam List<Long> ids){
+        log.info("ids:{}",ids);
+        setmealService.updateSetmealStatus(ids);
+
+        return R.success("启售套餐成功！");
+    }
+
+
+
+
 }
