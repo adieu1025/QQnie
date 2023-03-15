@@ -16,7 +16,7 @@
       <div class="tableBar">
         <el-input
           v-model="input"
-          placeholder="请输入菜品名称"
+          placeholder="请输入饮品名称"
           style="width: 250px"
           clearable
           @keyup.enter.native="handleQuery"
@@ -36,7 +36,7 @@
             type="primary"
             @click="addFoodtype('add')"
           >
-            + 新建菜品
+            + 新建饮品
           </el-button>
         </div>
       </div>
@@ -52,7 +52,7 @@
         ></el-table-column>
         <el-table-column
           prop="name"
-          label="菜品名称"
+          label="饮品名称"
         ></el-table-column>
         <el-table-column prop="image" label="图片" align="center">
           <template slot-scope="{ row }">
@@ -67,7 +67,7 @@
         </el-table-column>
         <el-table-column
           prop="categoryName"
-          label="菜品分类"
+          label="饮品分类"
         ></el-table-column>
         <el-table-column label="售价">
           <template slot-scope="scope">
@@ -204,7 +204,7 @@
                 return this.$message.error('请选择删除对象')
               }
             }
-            this.$confirm('确认删除该菜品, 是否继续?', '确定删除', {
+            this.$confirm('确认删除该饮品, 是否继续?', '确定删除', {
               'confirmButtonText': '确定',
               'cancelButtonText': '取消',
             }).then(() => {
@@ -226,7 +226,7 @@
             let params = {}
             if (typeof row === 'string' ) {
               if (this.checkList.length === 0) {
-                this.$message.error('批量操作，请先勾选操作菜品！')
+                this.$message.error('批量操作，请先勾选操作饮品！')
                 return false
               }
               params.id = this.checkList.join(',')
@@ -236,7 +236,7 @@
               params.status = row.status ? '0' : '1'
             }
             this.dishState = params
-            this.$confirm('确认更改该菜品状态?', '提示', {
+            this.$confirm('确认更改该饮品状态?', '提示', {
               'confirmButtonText': '确定',
               'cancelButtonText': '取消',
               'type': 'warning'
@@ -244,7 +244,7 @@
               // 起售停售---批量起售停售接口
               dishStatusByStatus(this.dishState).then(res => {
                 if (res.code === 1) {
-                  this.$message.success('菜品状态已经更改成功！')
+                  this.$message.success('饮品状态已经更改成功！')
                   this.handleQuery()
                 } else {
                   this.$message.error(res.msg || '操作失败')

@@ -22,7 +22,7 @@
           class="continue"
           @click="addClass('class')"
         >
-          + 新增菜品分类
+          + 新增饮品分类
         </el-button>
         <el-button
           type="primary"
@@ -45,7 +45,7 @@
           label="分类类型"
         >
           <template slot-scope="scope">
-            <span>{{ scope.row.type == '1' ? '菜品分类': '套餐分类' }}</span>
+            <span>{{ scope.row.type == '1' ? '饮品分类': '套餐分类' }}</span>
           </template>
         </el-table-column>
         <el-table-column

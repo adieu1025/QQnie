@@ -9,7 +9,7 @@
   background: url(../images/mainBg.png);
   background-repeat: no-repeat;
   height: 152rem;
-  background-size: contain;
+  background-size: cover;
 }
 
 #main .divHead img {
@@ -246,13 +246,13 @@
   width: 64rem;
   height: 24rem;
   opacity: 1;
-  background: #ffc200;
+  background: #f0c78a;
   border-radius: 12rem;
   font-size: 12rem;
   font-family: PingFangSC, PingFangSC-Regular;
   font-weight: 500;
   text-align: center;
-  color: #333333;
+  color: #000000;
   line-height: 24rem;
   letter-spacing: 0;
 }
@@ -331,7 +331,7 @@
 }
 #main .divCart .btnSubmitActive {
   color: #333333;
-  background: #ffc200;
+  background: #f0c78a;
 }
 
 #main .divCart .divGoodsNum {
@@ -421,7 +421,7 @@
   height: 30rem;
   opacity: 1;
   background: #ffffff;
-  border: 1rem solid #ffc200;
+  border: 1rem solid #f0c78a;
   border-radius: 7rem;
   line-height: 30rem;
   padding-left: 13rem;
@@ -435,7 +435,7 @@
 }
 
 #main .dialogFlavor .divContent .spanActive {
-  background: #ffc200;
+  background: #f0c78a;
   font-weight: 500;
 }
 
@@ -467,7 +467,7 @@
   width: 100rem;
   height: 30rem;
   opacity: 1;
-  background: #ffc200;
+  background: #f0c78a;
   border-radius: 15rem;
   text-align: center;
   line-height: 30rem;
@@ -703,7 +703,7 @@
   width: 64rem;
   height: 24rem;
   opacity: 1;
-  background: #ffc200;
+  background: #f0c78a;
   border-radius: 12rem;
   font-size: 12rem;
   font-family: PingFangSC, PingFangSC-Regular;
@@ -863,7 +863,7 @@
   width: 64rem;
   height: 24rem;
   opacity: 1;
-  background: #ffc200;
+  background: #f0c78a;
   border-radius: 12rem;
   font-size: 12rem;
   font-family: PingFangSC, PingFangSC-Regular;
@@ -888,7 +888,7 @@
   width: 100rem;
   height: 30rem;
   opacity: 1;
-  background: #ffc200;
+  background: #f0c78a;
   border-radius: 15rem;
   font-size: 14rem;
   font-family: PingFangSC, PingFangSC-Regular;

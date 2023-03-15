@@ -93,7 +93,7 @@
   margin-left: 20px;
   width: 28px;
   font-size: 14px;
-  color: #ffc200;
+  color: #ebb563;
   cursor: pointer;
 }
 
@@ -255,9 +255,9 @@
 }
 
 .el-menu .el-menu-item.is-active {
-  background-color: #ffc200 !important;
+  background-color: #f0c78a !important;
   color: #333333 !important;
-  border-radius: 0 21px 21px 0 !important;
+  border-radius: 0 10px 10px 0 !important;
 }
 .el-menu .el-menu-item.is-active span {
   color: #333333 !important;

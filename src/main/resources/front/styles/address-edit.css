@@ -130,13 +130,13 @@
 #address_edit .divContent .divSave {
   height: 36rem;
   opacity: 1;
-  background: #ffc200;
+  background: #f0c78a;
   border-radius: 18rem;
   font-size: 15rem;
   font-family: PingFangSC, PingFangSC-Regular;
   font-weight: 500;
   text-align: center;
-  color: #333333;
+  color: #000000;
   line-height: 36rem;
   margin-top: 20rem;
 }
