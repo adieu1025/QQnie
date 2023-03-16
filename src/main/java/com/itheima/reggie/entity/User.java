@@ -1,11 +1,13 @@
 package com.itheima.reggie.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
 /**
  * 移动端用户信息
  */
+@TableName("[user]")
 @Data
 public class User implements Serializable {
 

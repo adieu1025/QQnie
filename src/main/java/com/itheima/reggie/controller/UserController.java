@@ -88,6 +88,7 @@ public class UserController {
             queryWrapper.eq(User::getPhone,phone);
 
             User user = userService.getOne(queryWrapper);
+
             if (user == null){
                 //判断当前手机号对应的用户是否为新用户，如果是新用户就自动完成注册
                 user = new User();

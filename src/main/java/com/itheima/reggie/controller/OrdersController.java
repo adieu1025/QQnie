@@ -152,4 +152,16 @@ public class OrdersController {
         ordersService.updateStatus(orders);
         return R.success("修改订单状态成功！");
     }
+
+    /**
+     * 再来一单
+     * @param orders
+     * @return
+     */
+    @PostMapping("/again")
+    public R<String> again(@RequestBody Orders orders){
+        log.info("orders:{}",orders);
+        ordersService.again(orders);
+        return R.success("");
+    }
 }

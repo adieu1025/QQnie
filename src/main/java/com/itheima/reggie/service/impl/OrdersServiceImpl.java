@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -135,5 +136,49 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         }else {
             throw new CustomException("订单不存在！");
         }
+    }
+
+    /**
+     * 再来一单
+     * @param orders
+     */
+    @Override
+    public void again(Orders orders) {
+        //查询当前用户id
+        Long userId = BaseContext.getCurrentId();
+
+        //根据id查询数据库该订单的商品信息
+        LambdaQueryWrapper<OrderDetail> qw = new LambdaQueryWrapper<>();
+        qw.eq(OrderDetail::getOrderId,orders.getId());
+        List<OrderDetail> orderDetails = orderDetailService.list(qw);
+
+        //清空当前购物车数据
+        LambdaQueryWrapper<ShoppingCart> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(ShoppingCart::getUserId,userId);
+        shoppingCartService.remove(queryWrapper);
+
+        List<ShoppingCart> shoppingCarts = new ArrayList<>();
+        //把订单明细表中的商品数据放入购物车中
+        for(OrderDetail orderDetail : orderDetails){
+            //创建一个新的购物车对象
+            ShoppingCart shoppingCart = new ShoppingCart();
+            //给购物车对象赋值
+            shoppingCart.setName(orderDetail.getName());//名称
+            shoppingCart.setImage(orderDetail.getImage());//图片
+            shoppingCart.setUserId(userId);//用户Id
+            if(orderDetail.getDishId() != null){//dish数据
+                shoppingCart.setDishId(orderDetail.getDishId());
+                shoppingCart.setDishFlavor(orderDetail.getDishFlavor());
+            }else {//套餐数据
+                shoppingCart.setSetmealId(orderDetail.getSetmealId());
+            }
+            shoppingCart.setNumber(orderDetail.getNumber());//份数
+            shoppingCart.setAmount(orderDetail.getAmount());//总价
+            shoppingCart.setCreateTime(LocalDateTime.now());//时间
+            //添加到购物车集合
+            shoppingCarts.add(shoppingCart);
+        }
+        //保存到数据库
+        shoppingCartService.saveBatch(shoppingCarts);
     }
 }
