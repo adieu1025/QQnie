@@ -3,30 +3,12 @@ server:
 spring:
   application:
     #应用的名称，可选
-    name: reggie_take_out
+    name: QQnie
   datasource:
-#    druid:
-#      driver-class-name: com.mysql.cj.jdbc.Driver
-#      url: jdbc:mysql://localhost:3306/reggie?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
-#      username: root
-#      password: 123456
       driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
       url: jdbc:sqlserver://localhost:1433;DatabaseName=QQnie
       username: sa
       password: 123456
-      maxActive: 20
-      initialSize: 1
-      maxWait: 60000
-      minIdle: 1
-      timeBetweenEvictionRunsMillis: 60000
-      minEvictableIdleTimeMillis: 300000
-      validationQuery: select 1
-      testWhileIdle: true
-      testOnBorrow: true
-      testOnReturn: true
-      poolPreparedStatements: true
-      maxOpenPreparedStatements: 20
-
 
   #配置redis
   redis:
@@ -46,5 +28,5 @@ mybatis-plus:
     db-config:
       id-type: ASSIGN_ID
     #自定义配置，表示文件保存路径
-reggie:
-  path: E:\IdeaProjects\reggir_take_out\src\main\resources\dish_images\
+QQnie:
+  path: E:\IdeaProjects\QQnie\src\main\resources\milkTea_images\
