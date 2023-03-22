@@ -22,7 +22,7 @@ public class OrderDetail implements Serializable {
     private Long orderId;
 
 
-    //菜品id
+    //饮品id
     private Long dishId;
 
 

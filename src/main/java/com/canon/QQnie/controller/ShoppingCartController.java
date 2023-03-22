@@ -33,7 +33,7 @@ public class ShoppingCartController {
         Long userId = BaseContext.getCurrentId();
         shoppingCart.setUserId(userId);
 
-        //查询当前菜品或者套餐是否在购物车中
+        //查询当前饮品或者套餐是否在购物车中
         Long dishId = shoppingCart.getDishId();
         LambdaQueryWrapper<ShoppingCart> queryWrapper = new LambdaQueryWrapper<>();
         if (dishId != null){
@@ -88,14 +88,14 @@ public class ShoppingCartController {
     }
 
     /**
-     * 减少购物车中的菜品数量
+     * 减少购物车中的饮品数量
      * @param shoppingCart
      * @return
      */
     @PostMapping("/sub")
     public R<String> sub(@RequestBody ShoppingCart shoppingCart){
-        log.info("减少购物车中的菜品数量..");
-        //根据传进来的菜品id或者套餐id去查询购物车信息
+        log.info("减少购物车中的饮品数量..");
+        //根据传进来的饮品id或者套餐id去查询购物车信息
         LambdaQueryWrapper<ShoppingCart> queryWrapper = new LambdaQueryWrapper<>();
         if (shoppingCart.getDishId() != null){
             queryWrapper.eq(ShoppingCart::getDishId,shoppingCart.getDishId());

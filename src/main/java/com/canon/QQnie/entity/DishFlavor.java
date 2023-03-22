@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
-菜品口味
+饮品口味
  */
 @Data
 public class DishFlavor implements Serializable {
@@ -18,7 +18,7 @@ public class DishFlavor implements Serializable {
     private Long id;
 
 
-    //菜品id
+    //饮品id
     private Long dishId;
 
 

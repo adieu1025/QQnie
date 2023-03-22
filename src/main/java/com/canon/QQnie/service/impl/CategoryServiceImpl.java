@@ -32,10 +32,10 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         dishLambdaQueryWrapper.eq(Dish::getCategoryId,id);
         int count1 = dishService.count(dishLambdaQueryWrapper);
 
-        //查询当前分类是否关联了菜品，如果已经关联，抛出一个业务异常
+        //查询当前分类是否关联了饮品，如果已经关联，抛出一个业务异常
         if(count1 > 0){
-            //已经关联菜品，抛出一个业务异常
-            throw new CustomException("当前分类下关联了菜品，不能删除！");
+            //已经关联饮品，抛出一个业务异常
+            throw new CustomException("当前分类下关联了饮品，不能删除！");
         }
 
         //查询当前分类是否关联了套餐，如果已经关联，抛出一个业务异常

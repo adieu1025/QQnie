@@ -42,7 +42,7 @@ const queryDishById = (id) => {
   })
 }
 
-// 获取菜品分类列表
+// 获取饮品分类列表
 const getCategoryList = (params) => {
   return $axios({
     url: '/category/list',
@@ -51,7 +51,7 @@ const getCategoryList = (params) => {
   })
 }
 
-// 查菜品列表的接口
+// 查饮品列表的接口
 const queryDishList = (params) => {
   return $axios({
     url: '/dish/list',

@@ -79,7 +79,7 @@ public class CategoryController {
     }
 
     /**
-     *根据条件查询菜品分类的列表
+     *根据条件查询饮品分类的列表
      * @param category
      * @return
      */

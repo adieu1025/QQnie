@@ -23,15 +23,15 @@ public class SetmealServiceImpl extends ServiceImpl<SetmealMapper, Setmeal> impl
     private SetmealDishService setmealDishService;
 
     /**
-     * 新增套餐，同时需要保存套餐和菜品的关联关系
+     * 新增套餐，同时需要保存套餐和饮品的关联关系
      * @param setmealDto
      */
     @Override
     @Transactional
     public void saveWithDish(SetmealDto setmealDto) {
-        //保存菜品的基本信息，操作setmeal，执行insert操作
+        //保存饮品的基本信息，操作setmeal，执行insert操作
         this.save(setmealDto);
-        //保存套餐和菜品的关联信息，操作setmeal_dish，执行insert操作。
+        //保存套餐和饮品的关联信息，操作setmeal_dish，执行insert操作。
 
         List<SetmealDish> setmealDishes = setmealDto.getSetmealDishes();
 
@@ -44,7 +44,7 @@ public class SetmealServiceImpl extends ServiceImpl<SetmealMapper, Setmeal> impl
     }
 
     /**
-     * 删除套餐，同时需要删除套餐和菜品的关联数据
+     * 删除套餐，同时需要删除套餐和饮品的关联数据
      * @param ids
      */
     @Override
@@ -74,7 +74,7 @@ public class SetmealServiceImpl extends ServiceImpl<SetmealMapper, Setmeal> impl
     }
 
     /**
-     * 修改套餐，同时更新对应的菜品信息
+     * 修改套餐，同时更新对应的饮品信息
      * @param setmealDto
      */
     @Override
@@ -83,12 +83,12 @@ public class SetmealServiceImpl extends ServiceImpl<SetmealMapper, Setmeal> impl
         //更新套餐信息
         this.updateById(setmealDto);
 
-        //清除当前套餐的菜品信息(根据套餐id去删除)
+        //清除当前套餐的饮品信息(根据套餐id去删除)
         LambdaQueryWrapper<SetmealDish> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(SetmealDish::getSetmealId,setmealDto.getId());
         setmealDishService.remove(queryWrapper);
 
-        //添加当前提交过来的菜品数据
+        //添加当前提交过来的饮品数据
         List<SetmealDish> setmealDishes = setmealDto.getSetmealDishes();
         //把setmealId的值赋给setmealDishes（通过流的方式）
         setmealDishes = setmealDishes.stream().map((item)->{

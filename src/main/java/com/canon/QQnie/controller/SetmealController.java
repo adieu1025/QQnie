@@ -129,7 +129,7 @@ public class SetmealController {
     }
 
     /**
-     * 根据id查询套餐及其包含的菜品信息
+     * 根据id查询套餐及其包含的饮品信息
      * @param id
      * @return
      */
@@ -145,11 +145,11 @@ public class SetmealController {
         if (category != null){
             setmealDto.setCategoryName(category.getName());
         }
-        //查询菜品信息
+        //查询饮品信息
         LambdaQueryWrapper<SetmealDish> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(SetmealDish::getSetmealId,id);
         List<SetmealDish> setmealDishes = setmealDishService.list(queryWrapper);
-        //把查出来的菜品信息赋值给setmealDto
+        //把查出来的饮品信息赋值给setmealDto
         if (setmealDishes != null){
             setmealDto.setSetmealDishes(setmealDishes);
         }
@@ -171,17 +171,17 @@ public class SetmealController {
     }
 
     /**
-     * 根据套餐id获取套餐的全部菜品
+     * 根据套餐id获取套餐的全部饮品
      * @return
      */
     @GetMapping("/dish/{id}")
     public R<List<DishDto>> getDishesById(@PathVariable Long id){
-        //根据套餐id查套餐中的菜品信息----setmeal_dish表
+        //根据套餐id查套餐中的饮品信息----setmeal_dish表
         LambdaQueryWrapper<SetmealDish> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(SetmealDish::getSetmealId,id);
         List<SetmealDish> setmealDishes = setmealDishService.list(queryWrapper);
 
-        //获取套餐中所含菜品的id
+        //获取套餐中所含饮品的id
         List<Long> dishIds = new ArrayList<>();
         for(SetmealDish setmealDish : setmealDishes){
             dishIds.add(setmealDish.getDishId());

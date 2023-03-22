@@ -230,7 +230,7 @@
           el:'#main',
           data(){
             return {
-              //左边菜品类别index
+              //左边饮品类别index
               activeType:0,
               categoryList:[],
               categoryId:undefined,
@@ -307,7 +307,7 @@
                 }else{
                   this.$notify({ type:'warning', message:res[0].msg});
                 }
-                //获取菜品数据
+                //获取饮品数据
                 if(res[1].code === 1){
                 this.cartData = res[1].data
                 }else{
@@ -319,13 +319,13 @@
             categoryClick(index,id,type){
               this.activeType = index
               this.categoryId = id
-              if(type === 1){//菜品
+              if(type === 1){//饮品
                 this.getDishList()
               }else{
                 this.getSetmealData()
               }
             },
-            //获取菜品数据
+            //获取饮品数据
             async getDishList(){
               if(!this.categoryId){
                 return
@@ -385,12 +385,12 @@
               let params = {
                 amount:item.price/100,//金额
                 dishFlavor:item.dishFlavor,//口味  如果没有传undefined
-                dishId:undefined,//菜品id
+                dishId:undefined,//饮品id
                 setmealId:undefined,//套餐id
                 name:item.name,
                 image:item.image
               }
-              if(Array.isArray(item.flavors)){//表示是菜品
+              if(Array.isArray(item.flavors)){//表示是饮品
                 params.dishId = item.id
               }else{//表示套餐 套餐没有口味
                 params.setmealId = item.id
@@ -448,7 +448,7 @@
               let params = {
                 amount:item.amount,//金额
                 dishFlavor:item.dishFlavor,//口味  如果没有传undefined
-                dishId:item.dishId,//菜品id
+                dishId:item.dishId,//饮品id
                 setmealId:item.setmealId,//套餐id
                 name:item.name,
                 image:item.image

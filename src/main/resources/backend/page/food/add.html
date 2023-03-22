@@ -297,7 +297,7 @@
               'price': [
                 {
                   'required': true,
-                  // 'message': '请填写菜品价格',
+                  // 'message': '请填写饮品价格',
                   validator: (rules, value, callback) => {
                     if (!value) {
                       callback(new Error('请填写饮品价格'))
@@ -387,7 +387,7 @@
             }
           },
 
-          // 获取菜品分类
+          // 获取饮品分类
           getDishList () {
             getCategoryList({ 'type': 1 }).then(res => {
               if (res.code === 1) {
@@ -536,7 +536,7 @@
             window.parent.menuHandle({
               id: '4',
               url: '/backend/page/food/list.html',
-              name: '菜品管理'
+              name: '饮品管理'
             },false)
           }
         }

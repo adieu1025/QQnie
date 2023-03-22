@@ -487,27 +487,27 @@
               }
             })
           },
-          // 删除套餐菜品
+          // 删除套餐饮品
           delDishHandle(index) {
             this.dishTable.splice(index, 1)
             this.checkList.splice(index, 1)
           },
 
-          // 获取添加菜品数据
+          // 获取添加饮品数据
           getCheckList(value) {
             this.checkList = [...value]
           },
 
-          // 添加菜品
+          // 添加饮品
           openAddDish() {
             this.seachKey = ''
             this.dialogVisible = true
-            //搜索条件清空，菜品重新查询，菜品类别选第一个重新查询
+            //搜索条件清空，饮品重新查询，饮品类别选第一个重新查询
             this.value = ''
             this.keyInd = 0
             this.getDishList(this.dishType[0].id)
           },
-          // 取消添加菜品
+          // 取消添加饮品
           handleClose(done) {
             // this.$refs.adddish.close()
             this.dialogVisible = false
@@ -515,7 +515,7 @@
             // this.dialogVisible = false
           },
 
-          // 保存添加菜品列表
+          // 保存添加饮品列表
           addTableList() {
             this.dishTable = JSON.parse(JSON.stringify(this.checkList))
             this.dishTable.forEach((n) => {
@@ -648,7 +648,7 @@
             })
           },
 
-          // 通过套餐ID获取菜品列表分类
+          // 通过套餐ID获取饮品列表分类
           getDishList (id) {
             queryDishList({categoryId: id}).then(res => {
               if (res.code === 1) {
@@ -670,7 +670,7 @@
             })
           },
 
-          // 关键词收搜菜品列表分类
+          // 关键词收搜饮品列表分类
           getDishForName (name) {
             queryDishList({name}).then(res => {
               if (res.code === 1) {
